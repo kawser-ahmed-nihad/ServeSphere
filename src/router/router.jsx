@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import LoginPage from '../pages/LoginPage';
 import SignUp from '../pages/SignUp';
 import ForgotPassword from '../pages/ForgotPassword ';
+import CreateEvent from '../pages/CreateEvent';
 
 
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path : "create-event",
+        element: <CreateEvent />,
       },
 
 
