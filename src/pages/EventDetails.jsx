@@ -39,7 +39,7 @@ const EventDetails = () => {
       eventThumbnail: event.thumbnail,
       eventLocation: event.location,
       userEmail: user.email,
-      joinedAt: event.createdBy
+      joinedAt: event.date,
     };
 
     try {

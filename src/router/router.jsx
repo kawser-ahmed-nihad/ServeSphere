@@ -8,6 +8,7 @@ import ForgotPassword from '../pages/ForgotPassword ';
 import CreateEvent from '../pages/CreateEvent';
 import EventCard from '../pages/EventCard';
 import EventDetails from '../pages/EventDetails';
+import JoinEvents from '../pages/JoinEvents ';
 
 
 const router = createBrowserRouter([
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
       {
         path: "eventDetails/:id",
         element: <EventDetails />,
-      }
+      },
+      {
+        path: "joined-events",
+        element: <JoinEvents />,
+      },
 
 
 

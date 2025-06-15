@@ -44,7 +44,7 @@ const UpcomingEvents = () => {
               key={index}
               className="bg-white p-6 rounded-2xl shadow-md flex flex-col space-y-4"
             >
-              <p className="text-orange-500 font-medium">{event.date}</p>
+              <p className="text-orange-500 font-medium">{new Date(event.date).toLocaleDateString()}</p>
               <h2 className="text-xl font-semibold text-gray-800 leading-snug">
                 {event.title}
               </h2>
