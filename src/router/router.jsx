@@ -6,6 +6,8 @@ import LoginPage from '../pages/LoginPage';
 import SignUp from '../pages/SignUp';
 import ForgotPassword from '../pages/ForgotPassword ';
 import CreateEvent from '../pages/CreateEvent';
+import EventCard from '../pages/EventCard';
+import EventDetails from '../pages/EventDetails';
 
 
 const router = createBrowserRouter([
@@ -18,9 +20,18 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path : "create-event",
+        path: "create-event",
         element: <CreateEvent />,
       },
+      {
+        path: "upcoming-events",
+        element: <EventCard />,
+      },
+      {
+        path: "eventDetails/:id",
+        element: <EventDetails />,
+      }
+
 
 
     ]
