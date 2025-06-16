@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../context/AuthContext';
+import { Helmet } from 'react-helmet';
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -80,30 +81,35 @@ const EventDetails = () => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-20">
-      <img
-        src={event.thumbnail}
-        alt={event.title}
-        className="w-full h-64 md:h-96 object-cover rounded-xl shadow-md"
-      />
+    <div>
+      <Helmet>
+        <title>ServeSphere || Event Details</title>
+      </Helmet>
+      <div className="max-w-5xl  dark:bg-black  dark:text-white mx-auto px-4 py-20">
+        <img
+          src={event.thumbnail}
+          alt={event.title}
+          className="w-full h-64 md:h-96 object-cover rounded-xl shadow-md"
+        />
 
-      <div className="mt-8 space-y-4">
-        <h1 className="text-3xl font-bold text-gray-800">{event.title}</h1>
+        <div className="mt-8 space-y-4">
+          <h1 className="text-3xl font-bold text-gray-800">{event.title}</h1>
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm text-gray-600 space-y-2 sm:space-y-0">
-          <p><span className="font-semibold">📅 Date:</span> {new Date(event.date).toLocaleDateString()}</p>
-          <p><span className="font-semibold">📍 Location:</span> {event.location}</p>
-          <p><span className="font-semibold">📂 Type:</span> {event.eventType}</p>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm text-gray-600 space-y-2 sm:space-y-0">
+            <p><span className="font-semibold">📅 Date:</span> {new Date(event.date).toLocaleDateString()}</p>
+            <p><span className="font-semibold">📍 Location:</span> {event.location}</p>
+            <p><span className="font-semibold">📂 Type:</span> {event.eventType}</p>
+          </div>
+
+          <p className="text-gray-700 text-lg">{event.description}</p>
+
+          <button
+            onClick={handleJoin}
+            className="mt-6 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md font-semibold transition"
+          >
+            Join Event
+          </button>
         </div>
-
-        <p className="text-gray-700 text-lg">{event.description}</p>
-
-        <button
-          onClick={handleJoin}
-          className="mt-6 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md font-semibold transition"
-        >
-          Join Event
-        </button>
       </div>
     </div>
   );

@@ -73,7 +73,7 @@ const SignUp = () => {
             <Helmet>
                 <title>ServeSphere || Sign up</title>
             </Helmet>
-            <div className="bg-white flex items-center justify-center min-h-screen">
+            <div className="bg-white flex  dark:bg-black  dark:text-white items-center justify-center min-h-screen">
                 <div className="w-full max-w-md p-8 space-y-6">
                     
 

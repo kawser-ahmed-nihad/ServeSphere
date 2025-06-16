@@ -2,7 +2,7 @@ import React from 'react';
 
 const NewsletterSection = () => {
   return (
-    <section className="py-16 bg-orange-50 text-center px-4">
+    <section className="py-16  dark:bg-black  dark:text-white bg-orange-50 text-center px-4">
       <h2 className="text-3xl font-bold text-orange-600 mb-4">Subscribe to our Newsletter</h2>
       <p className="text-gray-700 mb-8 max-w-xl mx-auto">
         Stay updated with the latest social service events, stories, and opportunities to contribute.

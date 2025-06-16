@@ -4,7 +4,7 @@ import photo from '../assets/photo.jpg';
 const HeroSection = () => {
   return (
     <div
-      className="relative w-full h-screen bg-cover bg-center flex items-center justify-center"
+      className="relative  dark:bg-black  dark:text-white w-full h-screen bg-cover bg-center flex items-center justify-center"
       style={{
         backgroundImage: `url(${photo})`,
       }}

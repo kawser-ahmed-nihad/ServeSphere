@@ -11,7 +11,7 @@ const images = [
 
 const GallerySection = () => {
   return (
-    <section className="py-16 bg-white text-center">
+    <section className="py-16  dark:bg-black  dark:text-white bg-white text-center">
       <h2 className="text-3xl font-bold text-orange-500 mb-10">Event Gallery</h2>
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
         {images.map((src, index) => (

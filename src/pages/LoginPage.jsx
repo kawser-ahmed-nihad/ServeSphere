@@ -53,7 +53,7 @@ const LoginPage = () => {
             <Helmet>
                 <title>ServeSphere || Login</title>
             </Helmet>
-            <div className="bg-white flex items-center justify-center min-h-screen">
+            <div className="bg-white  dark:bg-black  dark:text-white flex items-center justify-center min-h-screen">
                 <div className="w-full max-w-md p-8 space-y-6">
                     <h2 className="text-center text-2xl font-bold text-gray-900">Sign in to your account</h2>
 

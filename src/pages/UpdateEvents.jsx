@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Helmet } from 'react-helmet';
 
 
 const UpdateEvents = () => {
@@ -80,33 +81,38 @@ const UpdateEvents = () => {
   if (!eventData) return <p className="text-center mt-24">Loading event details...</p>;
 
   return (
-    <div className="max-w-2xl mx-auto mt-24 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-center text-orange-500 mb-6">Update Event</h2>
-      <form onSubmit={handleUpdate} className="space-y-4">
-        <input type="text" name="title" defaultValue={eventData.title} placeholder="Title" className="w-full border p-2 rounded" required />
-        <textarea name="description" defaultValue={eventData.description} placeholder="Description" className="w-full border p-2 rounded" required />
-        <select name="eventType" defaultValue={eventData.eventType} className="w-full border p-2 rounded" required>
-          <option value="">Select Event Type</option>
-          <option value="Cleanup">Cleanup</option>
-          <option value="Plantation">Plantation</option>
-          <option value="Donation">Donation</option>
-        </select>
-        <input type="text" name="thumbnail" defaultValue={eventData.thumbnail} placeholder="Thumbnail URL" className="w-full border p-2 rounded" required />
-        <input type="text" name="location" defaultValue={eventData.location} placeholder="Location" className="w-full border p-2 rounded" required />
+    <>
+      <Helmet>
+        <title>ServeSphere || Update</title>
+      </Helmet>
+      <div className="max-w-2xl mx-auto mt-24 p-6 dark:bg-black  dark:text-white bg-white rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-center text-orange-500 mb-6">Update Event</h2>
+        <form onSubmit={handleUpdate} className="space-y-4">
+          <input type="text" name="title" defaultValue={eventData.title} placeholder="Title" className="w-full border p-2 rounded" required />
+          <textarea name="description" defaultValue={eventData.description} placeholder="Description" className="w-full border p-2 rounded" required />
+          <select name="eventType" defaultValue={eventData.eventType} className="w-full border p-2 rounded" required>
+            <option value="">Select Event Type</option>
+            <option value="Cleanup">Cleanup</option>
+            <option value="Plantation">Plantation</option>
+            <option value="Donation">Donation</option>
+          </select>
+          <input type="text" name="thumbnail" defaultValue={eventData.thumbnail} placeholder="Thumbnail URL" className="w-full border p-2 rounded" required />
+          <input type="text" name="location" defaultValue={eventData.location} placeholder="Location" className="w-full border p-2 rounded" required />
 
-        <DatePicker
-          selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
-          minDate={new Date()}
-          className="w-full border p-2 rounded"
-          placeholderText="Select event date"
-        />
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            minDate={new Date()}
+            className="w-full border p-2 rounded"
+            placeholderText="Select event date"
+          />
 
-        <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition">
-          Update Event
-        </button>
-      </form>
-    </div>
+          <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition">
+            Update Event
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

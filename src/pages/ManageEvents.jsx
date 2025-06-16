@@ -3,6 +3,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
+import { Helmet } from 'react-helmet';
 
 const ManageEvents = () => {
     const { user } = useContext(AuthContext);
@@ -60,43 +61,48 @@ const ManageEvents = () => {
     }
 
     return (
-        <div className="max-w-6xl mx-auto px-4 py-24">
-            <h2 className="text-3xl font-bold text-center text-orange-500 mb-10">Manage Your Events</h2>
+        <>
+            <Helmet>
+                <title>ServeSphere || Manage Events</title>
+            </Helmet>
+            <div className="max-w-6xl  dark:bg-black  dark:text-white mx-auto px-4 py-24">
+                <h2 className="text-3xl font-bold text-center text-orange-500 mb-10">Manage Your Events</h2>
 
-            {events.length === 0 ? (
-                <p className="text-center text-gray-500">You have not created any events yet.</p>
-            ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                    {events.map(event => (
-                        <div key={event._id} className="bg-white p-6 rounded-xl shadow-md space-y-3">
-                            <img
-                                src={event.thumbnail}
-                                alt={event.title}
-                                className="w-full h-40 object-cover rounded-md"
-                            />
-                            <h3 className="text-xl font-semibold text-gray-800">{event.title}</h3>
-                            <p className="text-sm text-gray-600"> {new Date(event.date).toLocaleDateString()}</p>
-                            <p className="text-gray-700 line-clamp-2">{event.description}</p>
+                {events.length === 0 ? (
+                    <p className="text-center text-gray-500">You have not created any events yet.</p>
+                ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                        {events.map(event => (
+                            <div key={event._id} className="bg-white p-6 rounded-xl shadow-md space-y-3">
+                                <img
+                                    src={event.thumbnail}
+                                    alt={event.title}
+                                    className="w-full h-40 object-cover rounded-md"
+                                />
+                                <h3 className="text-xl font-semibold text-gray-800">{event.title}</h3>
+                                <p className="text-sm text-gray-600"> {new Date(event.date).toLocaleDateString()}</p>
+                                <p className="text-gray-700 line-clamp-2">{event.description}</p>
 
-                            <div className="flex justify-between items-center mt-3">
-                                <button
-                                    onClick={() => handleUpdate(event._id)}
-                                    className="text-sm bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(event._id)}
-                                    className="text-sm bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                                >
-                                    Delete
-                                </button>
+                                <div className="flex justify-between items-center mt-3">
+                                    <button
+                                        onClick={() => handleUpdate(event._id)}
+                                        className="text-sm bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(event._id)}
+                                        className="text-sm bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </>
     );
 };
 

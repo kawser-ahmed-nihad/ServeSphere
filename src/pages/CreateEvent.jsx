@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const CreateEvent = () => {
   const { user } = useContext(AuthContext);
@@ -64,25 +65,30 @@ const CreateEvent = () => {
   const clearErrorOnChange = () => { if (error) setError(''); };
 
   return (
-    <div className="max-w-2xl mx-auto mt-24 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-center text-orange-500 mb-6">Create a New Event</h2>
-      {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
+    <>
+      <Helmet>
+        <title>ServeSphere || Create a New Event</title>
+      </Helmet>
+      <div className="max-w-2xl mx-auto mt-24 p-6  dark:bg-black  dark:text-white bg-white rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-center text-orange-500 mb-6">Create a New Event</h2>
+        {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input type="text" placeholder="Event Title" className="w-full border p-2 rounded" value={title} onChange={(e) => { setTitle(e.target.value); clearErrorOnChange(); }} />
-        <textarea placeholder="Event Description" className="w-full border p-2 rounded h-28" value={description} onChange={(e) => { setDescription(e.target.value); clearErrorOnChange(); }}></textarea>
-        <select value={eventType} onChange={(e) => { setEventType(e.target.value); clearErrorOnChange(); }} className="w-full border p-2 rounded">
-          <option value="Cleanup">Cleanup</option>
-          <option value="Plantation">Plantation</option>
-          <option value="Donation">Donation</option>
-          <option value="Education">Education</option>
-        </select>
-        <input type="text" placeholder="Thumbnail Image URL (https://)" className="w-full border p-2 rounded" value={thumbnail} onChange={(e) => { setThumbnail(e.target.value); clearErrorOnChange(); }} />
-        <input type="text" placeholder="Location" className="w-full border p-2 rounded" value={location} onChange={(e) => { setLocation(e.target.value); clearErrorOnChange(); }} />
-        <DatePicker selected={date} onChange={(date) => { setDate(date); clearErrorOnChange(); }} minDate={new Date()} className="w-full border p-2 rounded" placeholderText="Select event date" />
-        <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition">Create Event</button>
-      </form>
-    </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input type="text" placeholder="Event Title" className="w-full border p-2 rounded" value={title} onChange={(e) => { setTitle(e.target.value); clearErrorOnChange(); }} />
+          <textarea placeholder="Event Description" className="w-full border p-2 rounded h-28" value={description} onChange={(e) => { setDescription(e.target.value); clearErrorOnChange(); }}></textarea>
+          <select value={eventType} onChange={(e) => { setEventType(e.target.value); clearErrorOnChange(); }} className="w-full border p-2 rounded">
+            <option value="Cleanup">Cleanup</option>
+            <option value="Plantation">Plantation</option>
+            <option value="Donation">Donation</option>
+            <option value="Education">Education</option>
+          </select>
+          <input type="text" placeholder="Thumbnail Image URL (https://)" className="w-full border p-2 rounded" value={thumbnail} onChange={(e) => { setThumbnail(e.target.value); clearErrorOnChange(); }} />
+          <input type="text" placeholder="Location" className="w-full border p-2 rounded" value={location} onChange={(e) => { setLocation(e.target.value); clearErrorOnChange(); }} />
+          <DatePicker selected={date} onChange={(date) => { setDate(date); clearErrorOnChange(); }} minDate={new Date()} className="w-full border p-2 rounded" placeholderText="Select event date" />
+          <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition">Create Event</button>
+        </form>
+      </div>
+    </>
   );
 };
 
