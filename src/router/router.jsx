@@ -9,6 +9,10 @@ import CreateEvent from '../pages/CreateEvent';
 import EventCard from '../pages/EventCard';
 import EventDetails from '../pages/EventDetails';
 import JoinEvents from '../pages/JoinEvents ';
+import NotFound from '../pages/NotFound';
+import ManageEvents from '../pages/ManageEvents';
+import UpdateEvents from '../pages/UpdateEvents';
+
 
 
 const router = createBrowserRouter([
@@ -36,6 +40,14 @@ const router = createBrowserRouter([
         path: "joined-events",
         element: <JoinEvents />,
       },
+      {
+        path: "manage-events",
+        element: <ManageEvents />,
+      },
+      {
+        path: "/update-event/:id",
+        element: <UpdateEvents/>,
+      },
 
 
 
@@ -53,6 +65,10 @@ const router = createBrowserRouter([
   {
     path: "forgot",
     element: <ForgotPassword />
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   }
 ]);
 
