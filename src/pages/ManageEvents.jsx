@@ -14,7 +14,9 @@ const ManageEvents = () => {
     useEffect(() => {
         if (!user?.email) return;
 
-        axios.get(`http://localhost:3000/myEvents?email=${user.email}`)
+        axios.get(`https://a11-37fs.onrender.com/myEvents?email=${user.email}`, {
+            withCredentials: true
+        })
             .then(res => {
                 setEvents(res.data);
                 setLoading(false);
@@ -37,7 +39,9 @@ const ManageEvents = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`http://localhost:3000/events/${id}`);
+                    await axios.delete(`https://a11-37fs.onrender.com/events/${id}?email=${user.email}`, {
+                        withCredentials: true
+                    });
                     setEvents(events.filter(event => event._id !== id));
                     Swal.fire('Deleted!', 'Event has been deleted.', 'success');
                 } catch (err) {

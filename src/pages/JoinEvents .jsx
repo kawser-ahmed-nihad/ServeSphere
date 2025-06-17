@@ -13,7 +13,9 @@ const JoinEvents = () => {
         if (!user?.email) return;
 
         axios
-            .get(`http://localhost:3000/joinedEvents?email=${user.email}`)
+            .get(`https://a11-37fs.onrender.com/joinedEvents?email=${user.email}`,{
+                withCredentials: true
+            })
             .then((res) => {
                 const sortedEvents = res.data.sort(
                     (a, b) => new Date(a.date) - new Date(b.date)

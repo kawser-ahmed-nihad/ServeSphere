@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import { auth } from '../Firebase/Firebase.config';
 
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import axios from 'axios';
 
 const AuthProvider = ({ children }) => {
 
@@ -46,6 +47,18 @@ const AuthProvider = ({ children }) => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
+            if(currentUser?.email){
+                const userData = {email : currentUser.email}
+                axios.post('https://a11-37fs.onrender.com/jwt',userData ,{
+                    withCredentials : true
+                })
+                .then(res=>{
+                    console.log(res.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            }
         });
         return () => unSubscribe();
     }, []);

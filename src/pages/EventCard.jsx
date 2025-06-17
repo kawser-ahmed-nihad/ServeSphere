@@ -13,7 +13,7 @@ const UpcomingEvents = () => {
   const fetchEvents = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:3000/events', {
+      const res = await axios.get('https://a11-37fs.onrender.com/events', {
         params: {
           search,
           eventType,
@@ -29,6 +29,8 @@ const UpcomingEvents = () => {
   useEffect(() => {
     fetchEvents();
   }, [search, eventType]);
+
+ 
 
   return (
     <>
@@ -75,7 +77,7 @@ const UpcomingEvents = () => {
                 <p className="text-orange-500 font-medium">{new Date(event.date).toLocaleDateString()}</p>
                 <h2 className="text-xl font-semibold text-gray-800 leading-snug">{event.title}</h2>
                 <img
-                  src={event.image}
+                  src={event.thumbnail}
                   alt={event.title}
                   className="rounded-lg w-full h-48 object-cover"
                 />

@@ -12,6 +12,7 @@ import JoinEvents from '../pages/JoinEvents ';
 import NotFound from '../pages/NotFound';
 import ManageEvents from '../pages/ManageEvents';
 import UpdateEvents from '../pages/UpdateEvents';
+import PrivateRoute from '../Context/PrivateRoute';
 
 
 
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "create-event",
-        element: <CreateEvent />,
+        element:<PrivateRoute><CreateEvent/></PrivateRoute>,
       },
       {
         path: "upcoming-events",
@@ -34,23 +35,20 @@ const router = createBrowserRouter([
       },
       {
         path: "eventDetails/:id",
-        element: <EventDetails />,
+        element: <PrivateRoute><EventDetails/></PrivateRoute>,
       },
       {
         path: "joined-events",
-        element: <JoinEvents />,
+        element: <PrivateRoute><JoinEvents/></PrivateRoute>,
       },
       {
         path: "manage-events",
-        element: <ManageEvents />,
+        element: <PrivateRoute><ManageEvents/></PrivateRoute>,
       },
       {
         path: "/update-event/:id",
-        element: <UpdateEvents/>,
+        element: <PrivateRoute><UpdateEvents/></PrivateRoute>,
       },
-
-
-
     ]
 
   },

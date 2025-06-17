@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Helmet } from 'react-helmet';
+import { AuthContext } from '../Context/AuthContext';
 
 
 const UpdateEvents = () => {
@@ -12,17 +13,23 @@ const UpdateEvents = () => {
   const [eventData, setEventData] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    axios.get(`http://localhost:3000/events/${id}`)
-      .then(res => {
-        setEventData(res.data);
-        if (res.data.date) {
-          setSelectedDate(new Date(res.data.date));
-        }
-      })
-      .catch(err => console.error("Failed to load event:", err));
-  }, [id]);
+axios
+ axios.get(`https://a11-37fs.onrender.com/events/${id}`, {
+  withCredentials: true,
+  params: {
+    email: user.email, 
+  },
+})
+.then(res => {
+  setEventData(res.data);
+  if (res.data.date) {
+    setSelectedDate(new Date(res.data.date));
+  }
+})
+.catch(err => console.error("Failed to load event:", err));
+
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -54,7 +61,7 @@ const UpdateEvents = () => {
     };
 
     try {
-      const res = await axios.put(`http://localhost:3000/eventUpdate/${id}`, updatedEvent);
+      const res = await axios.put(`https://a11-37fs.onrender.com/eventUpdate/${id}`, updatedEvent);
       if (res.data.modifiedCount > 0) {
         Swal.fire({
           icon: 'success',

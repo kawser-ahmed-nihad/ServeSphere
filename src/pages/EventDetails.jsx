@@ -12,7 +12,11 @@ const EventDetails = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/events/${id}`)
+    if (!user?.email) return;
+
+    axios.get(`https://a11-37fs.onrender.com/events/${id}?email=${user.email}`, {
+      withCredentials: true
+    })
       .then((res) => {
         setEvent(res.data);
         setLoading(false);
@@ -21,7 +25,8 @@ const EventDetails = () => {
         console.error('Error loading event:', err);
         setLoading(false);
       });
-  }, [id]);
+  }, [id, user]);
+
 
   const handleJoin = async () => {
     if (!user) {
@@ -44,7 +49,11 @@ const EventDetails = () => {
     };
 
     try {
-      const res = await axios.post('http://localhost:3000/joinedEvents', joinData);
+      const res = await axios.post(
+        `https://a11-37fs.onrender.com/joinedEvents?email=${user.email}`,
+        joinData,
+        { withCredentials: true }
+      );
       if (res.data.insertedId) {
         Swal.fire({
           icon: 'success',

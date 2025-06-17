@@ -41,7 +41,13 @@ const CreateEvent = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:3000/events', eventData);
+      const response = await axios.post(
+        `https://a11-37fs.onrender.com/events?email=${user.email}`,
+        eventData,
+        {
+          withCredentials: true
+        }
+      );
       if (response.data.insertedId) {
         Swal.fire({
           icon: 'success',
@@ -80,7 +86,6 @@ const CreateEvent = () => {
             <option value="Cleanup">Cleanup</option>
             <option value="Plantation">Plantation</option>
             <option value="Donation">Donation</option>
-            <option value="Education">Education</option>
           </select>
           <input type="text" placeholder="Thumbnail Image URL (https://)" className="w-full border p-2 rounded" value={thumbnail} onChange={(e) => { setThumbnail(e.target.value); clearErrorOnChange(); }} />
           <input type="text" placeholder="Location" className="w-full border p-2 rounded" value={location} onChange={(e) => { setLocation(e.target.value); clearErrorOnChange(); }} />
