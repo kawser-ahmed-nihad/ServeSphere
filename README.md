@@ -1,12 +1,32 @@
-# React + Vite
+# ServeSphere 🌐
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ServeSphere is a modern React application built with [Vite](https://vitejs.dev/), designed for speed, developer productivity, and scalability. This project leverages Tailwind CSS for styling, Firebase for backend services, and includes a suite of helpful libraries for a seamless development experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tech Stack
 
-## Expanding the ESLint configuration
+- **React 19** – Fast and powerful UI library
+- **Vite** – Lightning-fast build tool with Hot Module Replacement (HMR)
+- **Tailwind CSS** – Utility-first CSS framework
+- **Firebase** – Backend-as-a-Service (auth, database, storage, etc.)
+- **Axios** – Promise-based HTTP client
+- **React Router v7** – Declarative routing for React
+- **SweetAlert2** – Beautiful, responsive alert dialogs
+- **Lottie React** – Animation rendering with Lottie JSON files
+- **React Helmet** – Manage document head (meta tags, titles, etc.)
+- **React Tooltip** – Tooltips made easy
+- **React Datepicker** – Customizable date picker component
+- **Lucide React** – Beautifully designed icon library
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📦 Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/your-username/servesphere.git
+cd servesphere
+
+# Install dependencies
+npm install
