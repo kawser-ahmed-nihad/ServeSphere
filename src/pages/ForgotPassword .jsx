@@ -18,7 +18,7 @@ const ForgotPassword = () => {
         sendPasswordResetEmail(auth, email)
             .then(() => {
                 Swal.fire("Success", "Password reset email sent!", "success");
-                setEmail(""); 
+                setEmail("");
             })
             .catch((error) => {
                 Swal.fire("Error", error.message, "error");
@@ -31,9 +31,9 @@ const ForgotPassword = () => {
                 <title>ServeSphere || Forgot Password</title>
             </Helmet>
 
-            <div className="min-h-screen  dark:bg-black  dark:text-white flex items-center justify-center bg-gray-100">
+            <div className="min-h-screen dark:bg-gray-800 dark:text-white flex items-center justify-center">
                 <form onSubmit={handleReset} className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
-                    <h2 className="text-xl font-bold mb-4 text-center">Reset Your Password</h2>
+                    <h2 className="text-xl font-bold mb-4 text-center text-gray-900 dark:text-gray-400">Reset Your Password</h2>
 
                     <input
                         type="email"
@@ -41,7 +41,7 @@ const ForgotPassword = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="w-full p-3 border border-gray-300 rounded mb-4 outline-none focus:ring-2 focus:ring-indigo-400"
+                        className="w-full p-3 border border-gray-300 rounded mb-4 outline-none  focus:ring-2 focus:ring-indigo-400 text-gray-900 dark:text-white  placeholder-gray-400 dark:placeholder-gray-500"
                     />
 
                     <button

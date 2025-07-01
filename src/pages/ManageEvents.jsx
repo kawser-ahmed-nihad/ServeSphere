@@ -14,14 +14,15 @@ const ManageEvents = () => {
     useEffect(() => {
         if (!user?.email) return;
 
-        axios.get(`https://a11-37fs.onrender.com/myEvents?email=${user.email}`, {
-            withCredentials: true
-        })
-            .then(res => {
+        axios
+            .get(`https://a11-37fs.onrender.com/myEvents?email=${user.email}`, {
+                withCredentials: true,
+            })
+            .then((res) => {
                 setEvents(res.data);
                 setLoading(false);
             })
-            .catch(err => {
+            .catch((err) => {
                 console.error('Failed to fetch events:', err);
                 setLoading(false);
             });
@@ -30,19 +31,19 @@ const ManageEvents = () => {
     const handleDelete = (id) => {
         Swal.fire({
             title: 'Are you sure?',
-            text: "Event will be permanently deleted!",
+            text: 'Event will be permanently deleted!',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#ef4444',
             cancelButtonColor: '#6b7280',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Yes, delete it!',
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
                     await axios.delete(`https://a11-37fs.onrender.com/events/${id}?email=${user.email}`, {
-                        withCredentials: true
+                        withCredentials: true,
                     });
-                    setEvents(events.filter(event => event._id !== id));
+                    setEvents(events.filter((event) => event._id !== id));
                     Swal.fire('Deleted!', 'Event has been deleted.', 'success');
                 } catch (err) {
                     console.error(err);
@@ -58,7 +59,7 @@ const ManageEvents = () => {
 
     if (loading) {
         return (
-            <div className="flex justify-center py-24 items-center h-screen">
+            <div className="flex justify-center py-24  dark:bg-gray-800 bg-white items-center h-screen">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-orange-500"></div>
             </div>
         );
@@ -69,42 +70,69 @@ const ManageEvents = () => {
             <Helmet>
                 <title>ServeSphere || Manage Events</title>
             </Helmet>
-            <div className="max-w-6xl  dark:bg-black  dark:text-white mx-auto px-4 py-24">
-                <h2 className="text-3xl font-bold text-center text-orange-500 mb-10">Manage Your Events</h2>
+            <div className='  dark:bg-gray-800 dark:text-white'>
+                <div className=" px-4 py-16 md:px-0 max-w-7xl mx-auto ">
+                    <h2 className="text-3xl font-bold text-left max-w-7xl mx-auto text-orange-500 mb-10">Manage Your Events</h2>
 
-                {events.length === 0 ? (
-                    <p className="text-center text-gray-500">You have not created any events yet.</p>
-                ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                        {events.map(event => (
-                            <div key={event._id} className="bg-white p-6 rounded-xl shadow-md space-y-3">
-                                <img
-                                    src={event.thumbnail}
-                                    alt={event.title}
-                                    className="w-full h-40 object-cover rounded-md"
-                                />
-                                <h3 className="text-xl font-semibold text-gray-800">{event.title}</h3>
-                                <p className="text-sm text-gray-600"> {new Date(event.date).toLocaleDateString()}</p>
-                                <p className="text-gray-700 line-clamp-2">{event.description}</p>
-
-                                <div className="flex justify-between items-center mt-3">
-                                    <button
-                                        onClick={() => handleUpdate(event._id)}
-                                        className="text-sm bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete(event._id)}
-                                        className="text-sm bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
+                    {events.length === 0 ? (
+                        <p className="text-center text-gray-500 dark:text-gray-400">
+                            You have not created any events yet.
+                        </p>
+                    ) : (
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full text-sm bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden">
+                                <thead className="bg-orange-500 text-white text-left">
+                                    <tr>
+                                        <th className="py-3 px-4">Thumbnail</th>
+                                        <th className="py-3 px-4">Title</th>
+                                        <th className="py-3 px-4">Date</th>
+                                        <th className="py-3 px-4">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {events.map((event) => (
+                                        <tr
+                                            key={event._id}
+                                            className="border-t dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                                        >
+                                            <td className="py-3 px-4">
+                                                <img
+                                                    src={event.thumbnail}
+                                                    alt={event.title}
+                                                    className="w-16 h-12 object-cover rounded"
+                                                />
+                                            </td>
+                                            <td className="py-3 px-4">{event.title}</td>
+                                            <td className="py-3 px-4">{new Date(event.date).toLocaleDateString()}</td>
+                                            <td className="py-3 px-4">
+                                                <div className="flex flex-wrap gap-2">
+                                                    <button
+                                                        onClick={() => handleUpdate(event._id)}
+                                                        className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs"
+                                                    >
+                                                        Edit
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleDelete(event._id)}
+                                                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                    <Link
+                                                        to={`/eventDetails/${event._id}`}
+                                                        className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
+                                                    >
+                                                        View
+                                                    </Link>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+                </div>
             </div>
         </>
     );

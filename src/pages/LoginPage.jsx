@@ -53,19 +53,19 @@ const LoginPage = () => {
             <Helmet>
                 <title>ServeSphere || Login</title>
             </Helmet>
-            <div className="bg-white  dark:bg-black  dark:text-white flex items-center justify-center min-h-screen">
+            <div className="dark:bg-gray-800 bg-white  dark:text-white flex items-center justify-center min-h-screen">
                 <div className="w-full max-w-md p-8 space-y-6">
-                    <h2 className="text-center text-2xl font-bold text-gray-900">Sign in to your account</h2>
+                    <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-gray-300">Sign in to your account</h2>
 
                     <form onSubmit={handleLogin} className="mt-8 space-y-6">
                         <div className="space-y-4">
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email address</label>
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-900 dark:text-gray-300">Email address</label>
                                 <input name="email" type="email" required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" />
                             </div>
                             <div>
                                 <div className="flex justify-between items-center">
-                                    <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+                                    <label htmlFor="password" className="block text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
                                     <Link to="/forgot" className="text-sm text-indigo-600 hover:underline">Forgot password?</Link>
                                 </div>
                                 <input name="password" type="password" required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" />

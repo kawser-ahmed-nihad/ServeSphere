@@ -13,6 +13,7 @@ import NotFound from '../pages/NotFound';
 import ManageEvents from '../pages/ManageEvents';
 import UpdateEvents from '../pages/UpdateEvents';
 import PrivateRoute from '../Context/PrivateRoute';
+import BlogDetails from '../pages/BlogDetails ';
 
 
 
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "create-event",
-        element:<PrivateRoute><CreateEvent/></PrivateRoute>,
+        element: <PrivateRoute><CreateEvent /></PrivateRoute>,
       },
       {
         path: "upcoming-events",
@@ -35,19 +36,23 @@ const router = createBrowserRouter([
       },
       {
         path: "eventDetails/:id",
-        element: <PrivateRoute><EventDetails/></PrivateRoute>,
+        element: <PrivateRoute><EventDetails /></PrivateRoute>,
       },
       {
         path: "joined-events",
-        element: <PrivateRoute><JoinEvents/></PrivateRoute>,
+        element: <PrivateRoute><JoinEvents /></PrivateRoute>,
       },
       {
         path: "manage-events",
-        element: <PrivateRoute><ManageEvents/></PrivateRoute>,
+        element: <PrivateRoute><ManageEvents /></PrivateRoute>,
       },
       {
         path: "/update-event/:id",
-        element: <PrivateRoute><UpdateEvents/></PrivateRoute>,
+        element: <PrivateRoute><UpdateEvents /></PrivateRoute>,
+      },
+      {
+        path: "/blogs/:id",
+        element: <BlogDetails />,
       },
     ]
 

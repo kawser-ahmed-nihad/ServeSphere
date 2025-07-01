@@ -92,7 +92,7 @@ axios
       <Helmet>
         <title>ServeSphere || Update</title>
       </Helmet>
-      <div className="max-w-2xl mx-auto mt-24 p-6 dark:bg-black  dark:text-white bg-white rounded-lg shadow-md">
+      <div className="max-w-2xl mx-auto mt-24 p-6 dark:bg-gray-800   dark:text-white bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center text-orange-500 mb-6">Update Event</h2>
         <form onSubmit={handleUpdate} className="space-y-4">
           <input type="text" name="title" defaultValue={eventData.title} placeholder="Title" className="w-full border p-2 rounded" required />

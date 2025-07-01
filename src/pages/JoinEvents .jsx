@@ -13,12 +13,12 @@ const JoinEvents = () => {
         if (!user?.email) return;
 
         axios
-            .get(`https://a11-37fs.onrender.com/joinedEvents?email=${user.email}`,{
-                withCredentials: true
+            .get(`https://a11-37fs.onrender.com/joinedEvents?email=${user.email}`, {
+                withCredentials: true,
             })
             .then((res) => {
                 const sortedEvents = res.data.sort(
-                    (a, b) => new Date(a.date) - new Date(b.date)
+                    (a, b) => new Date(a.joinedAt) - new Date(b.joinedAt)
                 );
                 setJoinedEvents(sortedEvents);
                 setLoading(false);
@@ -29,11 +29,9 @@ const JoinEvents = () => {
             });
     }, [user]);
 
-
-
     if (authLoading || loading) {
         return (
-            <div className="flex justify-center items-center h-screen">
+            <div className="flex justify-center dark:bg-gray-800 bg-white items-center h-screen">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-orange-500"></div>
             </div>
         );
@@ -42,47 +40,65 @@ const JoinEvents = () => {
     return (
         <>
             <Helmet>
-                <title>ServeSphere || Joind Events</title>
+                <title>ServeSphere || Joined Events</title>
             </Helmet>
-            <div className="max-w-6xl  dark:bg-black  dark:text-white mx-auto px-4 py-20">
-                <h5 className="text-orange-500 text-2xl uppercase tracking-wider font-semibold mb-8 text-center">
-                    Joined Events
-                </h5>
+            <div className='dark:bg-gray-800 bg-white'>
+                <div className="max-w-7xl mx-auto px-4 py-20 md:px-0 dark:text-white">
+                    <h5 className="text-orange-500 max-w-7xl mx-auto text-2xl uppercase tracking-wider font-semibold mb-8 text-left">
+                        Joined Events
+                    </h5>
 
-                {joinedEvents.length === 0 ? (
-                    <p className="text-center text-gray-500">You haven’t joined any events yet.</p>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {joinedEvents.map((event, index) => (
-                            <div
-                                key={index}
-                                className="bg-white p-6 rounded-2xl shadow-md flex flex-col space-y-4"
-                            >
-                                <p className="text-orange-500 font-medium">
-                                    {new Date(event.joinedAt).toLocaleDateString()}
-                                </p>
-
-                                <h2 className="text-xl font-semibold text-gray-800 leading-snug">
-                                    {event.eventTitle}
-                                </h2>
-
-                                <img
-                                    src={event.eventThumbnail}
-                                    alt={event.eventTitle}
-                                    className="rounded-lg w-full h-48 object-cover"
-                                />
-
-                                <Link
-                                    to={`/eventDetails/${event.eventId}`}
-                                    className="text-orange-500 font-medium inline-flex items-center hover:underline"
-                                >
-                                    Read More <span className="ml-1">→</span>
-                                </Link>
-                            </div>
-                        ))}
-                    </div>
-                )}
+                    {joinedEvents.length === 0 ? (
+                        <p className="text-center text-gray-500 dark:text-gray-400">
+                            You haven’t joined any events yet.
+                        </p>
+                    ) : (
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full text-sm bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden">
+                                <thead className="bg-orange-500 text-white">
+                                    <tr>
+                                        <th className="py-3 px-4 text-left">Thumbnail</th>
+                                        <th className="py-3 px-4 text-left">Title</th>
+                                        <th className="py-3 px-4 text-left">Joined Date</th>
+                                        <th className="py-3 px-4 text-left">Type</th>
+                                        <th className="py-3 px-4 text-left">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {joinedEvents.map((event, index) => (
+                                        <tr
+                                            key={index}
+                                            className="border-t dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                                        >
+                                            <td className="py-3 px-4">
+                                                <img
+                                                    src={event.eventThumbnail}
+                                                    alt={event.eventTitle}
+                                                    className="w-16 h-12 object-cover rounded"
+                                                />
+                                            </td>
+                                            <td className="py-3 px-4">{event.eventTitle}</td>
+                                            <td className="py-3 px-4">
+                                                {new Date(event.joinedAt).toLocaleDateString()}
+                                            </td>
+                                            <td className="py-3 px-4">{event.eventEventType}</td>
+                                            <td className="py-3 px-4">
+                                                <Link
+                                                    to={`/eventDetails/${event.eventId}`}
+                                                    className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs"
+                                                >
+                                                    View
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+                </div>
             </div>
+
         </>
     );
 };

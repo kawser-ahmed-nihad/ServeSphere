@@ -73,16 +73,16 @@ const SignUp = () => {
             <Helmet>
                 <title>ServeSphere || Sign up</title>
             </Helmet>
-            <div className="bg-white flex  dark:bg-black  dark:text-white items-center justify-center min-h-screen">
+            <div className="dark:bg-gray-800 bg-white flex dark:text-white items-center justify-center min-h-screen">
                 <div className="w-full max-w-md p-8 space-y-6">
                     
 
-                    <h2 className="text-center text-2xl font-bold text-gray-900">Sign up for an account</h2>
+                    <h2 className="text-center text-2xl font-bold text-gray-900  dark:text-gray-300">Sign up for an account</h2>
 
                     <form onSubmit={handleRegister} className="mt-8 space-y-6">
                         <div className="space-y-4">
                             <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                                     Name
                                 </label>
                                 <input
@@ -94,7 +94,7 @@ const SignUp = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="photo" className="block text-sm font-medium text-gray-700">
+                                <label htmlFor="photo" className="block text-sm font-medium dark:text-gray-300 text-gray-700">
                                     Photo URL
                                 </label>
                                 <input
@@ -106,7 +106,7 @@ const SignUp = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                                <label htmlFor="email" className="block text-sm font-medium dark:text-gray-300 text-gray-700">
                                     Email address
                                 </label>
                                 <input
@@ -118,7 +118,7 @@ const SignUp = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                                <label htmlFor="password" className="block text-sm font-medium dark:text-gray-300 text-gray-700">
                                     Password
                                 </label>
                                 <input
@@ -144,7 +144,7 @@ const SignUp = () => {
 
                     <p className="text-center text-sm text-gray-500">
                         Already have an account?{" "}
-                        <Link to="/login" className="bg-orange-500">
+                        <Link to="/login" className="text-orange-500">
                             Login
                         </Link>
                     </p>

@@ -30,7 +30,7 @@ const UpcomingEvents = () => {
     fetchEvents();
   }, [search, eventType]);
 
- 
+
 
   return (
     <>
@@ -38,12 +38,12 @@ const UpcomingEvents = () => {
       <Helmet>
         <title>ServeSphere || Upcoming Events</title>
       </Helmet>
-      <div className="max-w-6xl dark:bg-black dark:text-white mx-auto px-4 py-25">
-        <h5 className="text-orange-500 text-2xl uppercase tracking-wider font-semibold mb-8 text-center">
+      <div className=" dark:bg-gray-800 dark:text-white mx-auto px-4 md:px-0 py-25">
+        <h5 className="text-orange-500 text-2xl max-w-7xl mx-auto uppercase tracking-wider font-semibold mb-10 text-left">
           Upcoming Events
         </h5>
 
-        <div className="flex flex-col md:flex-row gap-4 mb-8 justify-center">
+        <div className="flex flex-col md:flex-row gap-10 mb-8 justify-between max-w-7xl mx-auto">
           <input
             type="text"
             placeholder="Search by event title"
@@ -55,7 +55,7 @@ const UpcomingEvents = () => {
           <select
             value={eventType}
             onChange={(e) => setEventType(e.target.value)}
-            className="border p-2 rounded  dark:bg-black  dark:text-white w-full md:w-1/4"
+            className="border p-2 rounded  dark:bg-gray-800 dark:text-white w-full md:w-1/4"
           >
             <option value="">All Types</option>
             <option value="Cleanup">Cleanup</option>
@@ -65,17 +65,17 @@ const UpcomingEvents = () => {
         </div>
 
         {loading ? (
-          <div className="flex justify-center py-20 items-center min-h-[50vh]">
+          <div className="flex justify-center py-24 items-center min-h-[50vh]">
             <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-orange-500 border-solid"></div>
           </div>
         ) : events.length === 0 ? (
-          <p className="text-center text-gray-500">No events found.</p>
+          <p className="text-center py-32 text-gray-500 min-h-[70vh]">No events found.</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid max-w-7xl mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {events.map((event, index) => (
-              <div key={index} className="bg-white p-6 rounded-2xl shadow-md flex flex-col space-y-4">
+              <div key={index} className="bg-white space-y-4 dark:bg-gray-900 p-6 rounded-2xl shadow-md hover:shadow-lg transition flex flex-col justify-between">
                 <p className="text-orange-500 font-medium">{new Date(event.date).toLocaleDateString()}</p>
-                <h2 className="text-xl font-semibold text-gray-800 leading-snug">{event.title}</h2>
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-white  leading-snug">{event.title}</h2>
                 <img
                   src={event.thumbnail}
                   alt={event.title}

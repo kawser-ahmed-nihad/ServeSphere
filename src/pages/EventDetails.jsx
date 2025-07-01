@@ -14,9 +14,10 @@ const EventDetails = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    axios.get(`https://a11-37fs.onrender.com/events/${id}?email=${user.email}`, {
-      withCredentials: true
-    })
+    axios
+      .get(`https://a11-37fs.onrender.com/events/${id}?email=${user.email}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setEvent(res.data);
         setLoading(false);
@@ -26,7 +27,6 @@ const EventDetails = () => {
         setLoading(false);
       });
   }, [id, user]);
-
 
   const handleJoin = async () => {
     if (!user) {
@@ -49,6 +49,43 @@ const EventDetails = () => {
     };
 
     try {
+      
+      const checkRes = await axios.get(
+        `https://a11-37fs.onrender.com/joinedEvents/check?eventId=${id}&email=${user.email}`,
+        { withCredentials: true }
+      );
+
+      if (checkRes.data?.alreadyJoined) {
+        
+        return Swal.fire({
+          title: 'Already joined!',
+          text: 'You have already joined this event. Do you want to join again?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, Join Again',
+          cancelButtonText: 'No',
+          confirmButtonColor: '#f97316',
+          cancelButtonColor: '#888',
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            const res = await axios.post(
+              `https://a11-37fs.onrender.com/joinedEvents?email=${user.email}`,
+              joinData,
+              { withCredentials: true }
+            );
+
+            if (res.data.insertedId) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Rejoined successfully!',
+                confirmButtonColor: '#f97316',
+              });
+            }
+          }
+        });
+      }
+
+     
       const res = await axios.post(
         `https://a11-37fs.onrender.com/joinedEvents?email=${user.email}`,
         joinData,
@@ -59,7 +96,7 @@ const EventDetails = () => {
           icon: 'success',
           title: 'Joined!',
           text: 'You have successfully joined the event.',
-          confirmButtonColor: '#f97316'
+          confirmButtonColor: '#f97316',
         });
       } else {
         throw new Error('Failed to join');
@@ -76,7 +113,7 @@ const EventDetails = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-orange-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-orange-500 border-solid"></div>
       </div>
     );
   }
@@ -90,34 +127,49 @@ const EventDetails = () => {
   }
 
   return (
-    <div>
+    <div className="dark:bg-gray-800 bg-white min-h-screen">
       <Helmet>
-        <title>ServeSphere || Event Details</title>
+        <title>ServeSphere || {event.title}</title>
       </Helmet>
-      <div className="max-w-5xl  dark:bg-black  dark:text-white mx-auto px-4 py-20">
-        <img
-          src={event.thumbnail}
-          alt={event.title}
-          className="w-full h-64 md:h-96 object-cover rounded-xl shadow-md"
-        />
 
-        <div className="mt-8 space-y-4">
-          <h1 className="text-3xl font-bold text-gray-800">{event.title}</h1>
+      <div className="max-w-7xl mx-auto px-4 md:px-0 py-20">
+     
+        <div className="rounded-xl overflow-hidden shadow-lg">
+          <img
+            src={event.thumbnail}
+            alt={event.title}
+            className="w-full h-[320px] md:h-[480px] object-cover transform hover:scale-105 transition duration-500"
+          />
+        </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm text-gray-600 space-y-2 sm:space-y-0">
-            <p><span className="font-semibold">📅 Date:</span> {new Date(event.date).toLocaleDateString()}</p>
-            <p><span className="font-semibold">📍 Location:</span> {event.location}</p>
-            <p><span className="font-semibold">📂 Type:</span> {event.eventType}</p>
+       
+        <div className="mt-10 space-y-6">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-orange-500">{event.title}</h1>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600 dark:text-gray-400">
+            <p className=" dark:text-gray-300 rounded-lg px-4 py-3 ">
+              📅 <span className="font-semibold">Date:</span> {new Date(event.date).toLocaleDateString()}
+            </p>
+            <p className=" dark:text-gray-400 rounded-lg px-4 py-3 ">
+              📍 <span className="font-semibold">Location:</span> {event.location}
+            </p>
+            <p className=" dark:text-gray-400 rounded-lg px-4 py-3 ">
+              📂 <span className="font-semibold">Type:</span> {event.eventType}
+            </p>
           </div>
 
-          <p className="text-gray-700 text-lg">{event.description}</p>
+          <p className="text-lg text-black dark:text-gray-300 leading-relaxed mt-6 border-l-4 border-orange-400 pl-4">
+            {event.description}
+          </p>
 
-          <button
-            onClick={handleJoin}
-            className="mt-6 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md font-semibold transition"
-          >
-            Join Event
-          </button>
+          <div className="mt-10">
+            <button
+              onClick={handleJoin}
+              className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full font-semibold transition duration-300 shadow-lg"
+            >
+              Join This Event
+            </button>
+          </div>
         </div>
       </div>
     </div>

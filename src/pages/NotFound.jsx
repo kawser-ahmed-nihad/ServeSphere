@@ -12,7 +12,7 @@ const NotFound = () => {
                 <title>ServeSphere || Page not Found</title>
             </Helmet>
 
-            <div className="min-h-screen  dark:bg-black  dark:text-white flex flex-col justify-center items-center bg-white px-4 text-center">
+            <div className="min-h-screen  dark:bg-gray-800   dark:text-white flex flex-col justify-center items-center bg-white px-4 text-center">
                 <img
                     src={errorPng}
                     alt="404 illustration"
