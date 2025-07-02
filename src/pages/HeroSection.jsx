@@ -6,7 +6,7 @@ const HeroSection = () => {
     <div
       className="relative dark:bg-gray-800 dark:text-white w-full h-[400px] bg-cover bg-center flex items-center justify-center"
       style={{
-        backgroundImage: `url(${photo})`,
+        backgroundImage: `url(${photo})`,                                   
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/30"></div>

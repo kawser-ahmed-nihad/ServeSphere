@@ -14,7 +14,7 @@ const images = [
 const GallerySection = () => {
   return (
     <section className="py-5 dark:bg-gray-800 dark:text-white text-left">
-      <h2 className="text-3xl max-w-7xl mx-auto font-bold text-orange-500 mb-10">Event Gallery</h2>
+      <h2 className="text-3xl max-w-7xl mx-auto px-4 md:px-0 font-bold text-orange-500 mb-10">Event Gallery</h2>
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 px-4 md:px-0">
         {images.map((src, index) => (
           <div key={index} className="overflow-hidden rounded-lg shadow hover:scale-105 transition">

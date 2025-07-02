@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
 import { DarkModeContext } from '../Context/DarkModeProvider';
@@ -9,8 +9,6 @@ const Navbar = () => {
   const { user, logOut, loading } = useContext(AuthContext);
   const { darkMode, setDarkMode } = useContext(DarkModeContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  
 
   const handleLogOut = () => {
     Swal.fire({
@@ -32,53 +30,47 @@ const Navbar = () => {
 
   const navLinkStyle = ({ isActive }) =>
     isActive
-    ? 'text-orange-500 dark:text-orange-400 underline underline-offset-4 font-semibold'
-    : 'hover:text-orange-500 dark:hover:text-orange-400';
-
+      ? 'text-orange-500 dark:text-orange-400 underline underline-offset-4 font-semibold'
+      : 'hover:text-orange-500 dark:hover:text-orange-400';
 
   return (
     <>
-      {/* Global Loading Spinner */}
+
       {loading && (
         <div className="fixed top-0 right-40 z-[100] px-4 py-5">
           <div className="h-6 w-6 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
 
-      {/* Main Navbar */}
-      <nav className=" fixed top-0 w-full z-50 backdrop-blur-md bg-white/20 dark:bg-gray-800 text-black dark:text-white shadow-sm">
-        <div className="flex max-w-7xl mx-auto justify-between items-center  px-4 md:px-0 py-4 transition-all duration-300">
+    
+      <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-white/20 dark:bg-gray-800 text-black dark:text-white shadow-sm">
+        <div className="flex max-w-7xl mx-auto justify-between items-center px-4 md:px-0 py-4">
 
-          {/* Left - Logo */}
+        
           <NavLink to="/" className="text-2xl font-bold text-orange-500">ServeSphere</NavLink>
 
-          {/* Center - NavLinks */}
-          <div className="hidden md:flex gap-6 absolute left-1/2 -translate-x-1/2 text-sm font-medium transition-all duration-300">
+          <div className="hidden md:flex gap-6 absolute left-1/2 -translate-x-1/2 text-sm font-medium">
             <NavLink to="/upcoming-events" className={navLinkStyle}>Events</NavLink>
-            <NavLink to="/create-event" className={navLinkStyle}>Create</NavLink>
-            <NavLink to="/manage-events" className={navLinkStyle}>Manage</NavLink>
-            <NavLink to="/joined-events" className={navLinkStyle}>Joined</NavLink>
+            <NavLink to="/create-event" className={navLinkStyle}>Create Event</NavLink>
+            <NavLink to="/manage-events" className={navLinkStyle}>Manage Events</NavLink>
+            <NavLink to="/joined-events" className={navLinkStyle}>Joined Events</NavLink>
+            <NavLink to="/contact" className={navLinkStyle}>Contact</NavLink>
           </div>
 
-          {/* Right - Theme, User, Auth */}
-          <div className="hidden md:flex items-center gap-4 transition-all duration-300">
+    
+          <div className="hidden md:flex items-center gap-4">
             <button onClick={() => setDarkMode(!darkMode)} aria-label="Toggle Theme">
-              {darkMode
-                ? <Sun className="w-6 h-6 text-orange-400" />
-                : <Moon className="w-6 h-6 text-orange-400" />}
+              {darkMode ? <Sun className="w-6 h-6 text-orange-400" /> : <Moon className="w-6 h-6 text-orange-400" />}
             </button>
 
             {user ? (
               <>
-
                 <img
                   src={user.photoURL}
                   alt="User"
                   title={user.displayName}
                   className="w-9 h-9 rounded-full border-2 border-orange-500 object-cover"
-                 
                 />
-
                 <button
                   onClick={handleLogOut}
                   className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition"
@@ -96,12 +88,10 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
+         
           <div className="md:hidden flex items-center gap-3">
             <button onClick={() => setDarkMode(!darkMode)}>
-              {darkMode
-                ? <Sun className="w-6 h-6 text-orange-400" />
-                : <Moon className="w-6 h-6 text-orange-400" />}
+              {darkMode ? <Sun className="w-6 h-6 text-orange-400" /> : <Moon className="w-6 h-6 text-orange-400" />}
             </button>
             <button onClick={() => setIsMobileMenuOpen(true)}>
               <Menu className="w-6 h-6 text-orange-400" />
@@ -110,36 +100,61 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu - Slide Right to Left */}
-      <div className={`fixed top-0 right-0 h-full w-64 bg-white dark:bg-[#1f1f1f] text-black dark:text-white z-50 shadow-lg transform transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex justify-between items-center px-4 py-4 border-b dark:border-gray-700">
-          <h2 className="text-lg font-bold text-orange-500">ServeSphere</h2>
-          <X className="w-6 h-6 text-orange-400 cursor-pointer" onClick={() => setIsMobileMenuOpen(false)} />
-        </div>
+    
+      <div className={`fixed inset-0 z-50 transition duration-300 ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
+     
+        <div
+          className="absolute inset-0 bg-black/40 backdrop-blur-sm dark:bg-gray-800/50"
 
-        <div className="flex flex-col px-6 py-6 space-y-4 text-base">
-          <NavLink to="/upcoming-events" className={navLinkStyle} onClick={() => setIsMobileMenuOpen(false)}>Events</NavLink>
-          <NavLink to="/create-event" className={navLinkStyle} onClick={() => setIsMobileMenuOpen(false)}>Create Event</NavLink>
-          <NavLink to="/manage-events" className={navLinkStyle} onClick={() => setIsMobileMenuOpen(false)}>Manage Events</NavLink>
-          <NavLink to="/joined-events" className={navLinkStyle} onClick={() => setIsMobileMenuOpen(false)}>Joined Events</NavLink>
+          onClick={() => setIsMobileMenuOpen(false)}
+        ></div>
 
-          {user ? (
-            <>
-              <div className="flex items-center gap-2">
+       
+        <div className="absolute right-0 top-0 h-full w-72 sm:w-80 bg-white dark:bg-gray-800 shadow-lg transform transition-transform duration-300">
+          <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+            <h2 className="text-xl font-bold text-orange-500">ServeSphere</h2>
+            <X className="w-6 h-6 text-orange-400 cursor-pointer" onClick={() => setIsMobileMenuOpen(false)} />
+          </div>
 
-                <img
-                  src={user.photoURL}
-                  alt="User"
-                  className="w-9 h-9 rounded-full border-2 border-orange-500 object-cover"
-                />
+          <div className="flex flex-col px-6 py-6 space-y-4 text-base font-medium">
+            <NavLink to="/upcoming-events" className={navLinkStyle} onClick={() => setIsMobileMenuOpen(false)}>Events</NavLink>
+            <NavLink to="/create-event" className={navLinkStyle} onClick={() => setIsMobileMenuOpen(false)}>Create Event</NavLink>
+            <NavLink to="/manage-events" className={navLinkStyle} onClick={() => setIsMobileMenuOpen(false)}>Manage Events</NavLink>
+            <NavLink to="/joined-events" className={navLinkStyle} onClick={() => setIsMobileMenuOpen(false)}>Joined Events</NavLink>
+            <NavLink to="/contact" className={navLinkStyle} onClick={() => setIsMobileMenuOpen(false)}>Contact</NavLink>
 
-                <span className="text-sm">{user.displayName}</span>
-              </div>
-              <button onClick={handleLogOut} className="text-red-500 text-left">Logout</button>
-            </>
-          ) : (
-            <NavLink to="/login" className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition" onClick={() => setIsMobileMenuOpen(false)}>Login</NavLink>
-          )}
+            <hr className="border-t border-gray-300 dark:border-gray-700 my-3" />
+
+            {user ? (
+              <>
+                <div className="flex items-center gap-3 mt-2">
+                  <img
+                    src={user.photoURL}
+                    alt="User"
+                    className="w-10 h-10 rounded-full border-2 border-orange-500 object-cover"
+                  />
+                  <div>
+                    <p className="text-sm font-semibold">{user.displayName}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{user.email}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={handleLogOut}
+                  className="mt-4 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <NavLink
+                to="/login"
+                className="mt-4 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition text-center"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Login
+              </NavLink>
+            )}
+          </div>
         </div>
       </div>
     </>

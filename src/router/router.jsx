@@ -14,6 +14,7 @@ import ManageEvents from '../pages/ManageEvents';
 import UpdateEvents from '../pages/UpdateEvents';
 import PrivateRoute from '../Context/PrivateRoute';
 import BlogDetails from '../pages/BlogDetails ';
+import Contact from '../pages/Contact';
 
 
 
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/blogs/:id",
         element: <BlogDetails />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
     ]
 

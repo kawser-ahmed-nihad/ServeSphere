@@ -42,7 +42,7 @@ const ForgotPassword = () => {
                         onChange={(e) => setEmail(e.target.value)}
                         required
                         className="w-full p-3 border border-gray-300 rounded mb-4 outline-none  focus:ring-2 focus:ring-indigo-400 text-gray-900 dark:text-white  placeholder-gray-400 dark:placeholder-gray-500"
-                    />
+                    /> 
 
                     <button
                         type="submit"
