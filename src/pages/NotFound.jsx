@@ -13,7 +13,7 @@ const NotFound = () => {
                 <title>ServeSphere || Page not Found</title>
             </Helmet>
 
-            <div className=" dark:bg-gray-800 mt-24 md:mt-4 dark:text-white flex flex-col justify-center items-center bg-white px-4 text-center">
+            <div className="min-h-screen dark:bg-gray-800   dark:text-white flex flex-col justify-center items-center bg-white px-4 text-center">
                 <DotLottieReact
                     src="https://lottie.host/ed6b01d7-e123-47e4-90fa-2c172df78845/lQH0xR3mag.lottie"
                     loop
