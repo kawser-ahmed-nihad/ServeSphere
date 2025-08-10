@@ -15,7 +15,7 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           {/* Left Info Section */}
           <div className="space-y-8">
-            {/* Address */}
+            
             <div className="flex items-start space-x-4">
               <div className="p-4 rounded-full bg-orange-100 dark:bg-gray-900">
                 <FaMapMarkerAlt className="text-orange-600 text-xl" />
@@ -29,7 +29,7 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Phone */}
+           
             <div className="flex items-start space-x-4">
               <div className="p-4 rounded-full bg-orange-100 dark:bg-gray-900">
                 <FaPhoneAlt className="text-orange-600 text-xl" />
