@@ -4,7 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../context/AuthContext';
 import { Helmet } from 'react-helmet';
-
+import { FiCalendar, FiMapPin, FiFolder } from "react-icons/fi";
 const EventDetails = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
@@ -49,14 +49,14 @@ const EventDetails = () => {
     };
 
     try {
-      
+
       const checkRes = await axios.get(
         `https://a11-37fs.onrender.com/joinedEvents/check?eventId=${id}&email=${user.email}`,
         { withCredentials: true }
       );
 
       if (checkRes.data?.alreadyJoined) {
-        
+
         return Swal.fire({
           title: 'Already joined!',
           text: 'You have already joined this event. Do you want to join again?',
@@ -85,7 +85,7 @@ const EventDetails = () => {
         });
       }
 
-     
+
       const res = await axios.post(
         `https://a11-37fs.onrender.com/joinedEvents?email=${user.email}`,
         joinData,
@@ -133,7 +133,7 @@ const EventDetails = () => {
       </Helmet>
 
       <div className="max-w-7xl mx-auto px-4 md:px-0 py-20">
-     
+
         <div className="rounded-xl overflow-hidden shadow-lg">
           <img
             src={event.thumbnail}
@@ -142,26 +142,31 @@ const EventDetails = () => {
           />
         </div>
 
-       
+
         <div className="mt-10 space-y-6">
           <h1 className="text-4xl md:text-5xl font-extrabold text-orange-500">{event.title}</h1>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600 dark:text-gray-400">
-            <p className=" dark:text-gray-300 rounded-lg px-4 py-3 ">
-              📅 <span className="font-semibold">Date:</span> {new Date(event.date).toLocaleDateString()}
+            <p className="flex items-center gap-2 dark:text-gray-300 rounded-lg px-4 py-3">
+              <FiCalendar className="text-lg" />
+              <span className="font-semibold">Date:</span> {new Date(event.date).toLocaleDateString()}
             </p>
-            <p className=" dark:text-gray-400 rounded-lg px-4 py-3 ">
-              📍 <span className="font-semibold">Location:</span> {event.location}
+
+            <p className="flex items-center gap-2 dark:text-gray-400 rounded-lg px-4 py-3">
+              <FiMapPin className="text-lg" />
+              <span className="font-semibold">Location:</span> {event.location}
             </p>
-            <p className=" dark:text-gray-400 rounded-lg px-4 py-3 ">
-              📂 <span className="font-semibold">Type:</span> {event.eventType}
+
+            <p className="flex items-center gap-2 dark:text-gray-400 rounded-lg px-4 py-3">
+              <FiFolder className="text-lg" />
+              <span className="font-semibold">Type:</span> {event.eventType}
             </p>
           </div>
 
           <p className="text-lg text-black dark:text-gray-300 leading-relaxed mt-6 border-l-4 border-orange-400 pl-4">
             {event.description}
           </p>
-
+          
           <div className="mt-10">
             <button
               onClick={handleJoin}
