@@ -16,7 +16,7 @@ const HeroSection = () => {
           Welcome to our ServeSphere
         </h5>
         <h1 className="text-3xl md:text-5xl max-w-3xl font-bold mb-4">
-          <span className="text-orange-500">Join hands,</span> create waves of positive change
+          <span className="text-orange-500">Join hands,</span> create waves <br /> of positive change
         </h1>
         <p className="text-lg md:text-xl max-w-2xl">
           ServeSphere is a community-driven platform connecting people with local social
