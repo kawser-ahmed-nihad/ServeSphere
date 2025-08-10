@@ -58,7 +58,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Right Contact Form */}
+          
           <form className="dark:bg-gray-900 dark:text-white p-8 rounded shadow-md">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
