@@ -10,7 +10,7 @@ const Footer = () => {
      
         <div>
           <h2 className="text-2xl font-bold text-orange-500 mb-4">ServeSphere</h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="text-sm leading-relaxed">
             A community-driven platform connecting people with social service events near them. Empowering change, one event at a time.
           </p>
         </div>
